@@ -1,7 +1,9 @@
 var DIR_PATH = __dirname + "/node_modules/";
 
 var express = require(DIR_PATH+'express');
-var ejs = require(DIR_PATH+"/ejs");
+var ejs = require(DIR_PATH+"ejs");
+var Waterline = require(DIR_PATH+"waterline");
+var fs = require("fs");
 var app = express();
 
 app.get('/hello', function(req, res){
@@ -11,4 +13,5 @@ app.get('/hello', function(req, res){
     res.end(body);
 });
 
+// Start Server
 app.listen(8080);
