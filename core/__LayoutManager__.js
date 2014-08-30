@@ -3,23 +3,22 @@
  */
 
 var __Layout__ = require("./__Layout__")["__Layout__"],
-    ejs = require("../node_modules/ejs"),
+    ejs = require(DIR_PATH + "/ejs"),
     fs = require("fs"),
     path = require("path"),
     ArrayProto = Array.prototype;
 
-var LAYOUT_DIR = path.resolve(__dirname,"../layout");
-
-function __LayoutManager__()
+function __LayoutManager__(res)
 {
     this._layouts = [];
+    this._res = res;
 }
 
 __LayoutManager__.prototype.createLayout = function(layoutPath,params){
     var self = this,
         _layout = new __Layout__(params);
 
-    layoutPath = path.join(LAYOUT_DIR,layoutPath);
+    layoutPath = path.join(LAYOUT_PATH,layoutPath);
 
     ArrayProto.push.call(self._layouts,{
         path:layoutPath,
@@ -92,6 +91,8 @@ __LayoutManager__.prototype.render = function(){
     variables["scriptList"] = scriptList.join('');
 
     result = ejs.render(layoutStr,variables);
+
+    self._res.send(200,result.htmlStr);
 }
 
 __LayoutManager__.prototype._filterList = function(list,fn){

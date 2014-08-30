@@ -2,7 +2,7 @@
  * Created by mac on 14-8-28.
  */
 
-var __LayoutItem__ = require("./__layoutItem__.js")["__LayoutItem__"],
+var __LayoutItem__ = require("./__LayoutItem__.js")["__LayoutItem__"],
     ArrayProto = Array.prototype;
 
 function __Layout__(params)
@@ -37,7 +37,7 @@ __Layout__.prototype.createItem = function(params){
         _item.parent = self;
         _item.layout = self;
 
-        ArrayProto.push(_childList,_item);
+        ArrayProto.push.call(_childList,_item);
     }else
     {
         pow = renderItem.index.toString().split('.').join('').length;

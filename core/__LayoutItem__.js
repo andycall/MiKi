@@ -5,10 +5,8 @@
 var fs = require("fs"),
     path = require("path"),
     readFile = fs.readFileSync,
-    ejs = require("../node_modules/ejs"),
+    ejs = require(DIR_PATH+"/ejs"),
     ArrayProto = Array.prototype;
-
-var TEMPLATE_DIR = path.resolve(__dirname,"../template");
 
 function __LayoutItem__(paramMap)
 {
@@ -36,7 +34,7 @@ __LayoutItem__.prototype.setBlock = function(variable,template)
         _fileStr = '',
         _renderObj = {};
 
-    template = path.join(TEMPLATE_DIR,template);
+    template = path.join(TEMPLATE_PATH,template);
 
     if(_args.length < 2)
     {

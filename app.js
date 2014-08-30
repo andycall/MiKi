@@ -1,21 +1,23 @@
+/**
+ * 定义一些全局定义一些全局的常量
+ * @type {string}
+ */
 DIR_PATH = __dirname + "/node_modules/";
 TEMPLATE_PATH = __dirname +"/template/";
+VIEW_PATH = __dirname + "/views";
+CORE_PATH = __dirname + "/core";
+LAYOUT_PATH = __dirname +"/layout";
+CONTROL_PATH = __dirname + "/control";
+SERVER_PATH = __dirname + "/server";
+WIDGET_PATH = __dirname + "/widget";
 
-var express = require(DIR_PATH+'express');
-var ejs = require(DIR_PATH+"ejs");
-var waterline = require(DIR_PATH+"waterline");
+var express = require(DIR_PATH + "express");
+var ejs = require(DIR_PATH + "ejs");
+
 app = express();
-
 app.ejs = ejs;
-app.waterline = waterline;
 
-app.get('/hello', function(req, res){
-    var body = 'Hello World';
-    res.setHeader('Content-Type', 'text/plain');
-    res.setHeader('Content-Length', body.length);
-    res.end(body);
-});
+require("./server/index.server.js");
 
-// Start Server
 app.listen(8080);
 
