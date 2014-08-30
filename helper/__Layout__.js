@@ -10,16 +10,15 @@ function __Layout__()
     this._itemCount = 0;
     this._childList = [];
 
-
     this.renderItem = null;
-    this.htmlArr = [];
+    this.itemArr = [];
     this.scriptList = [];
     this.cssList = [];
     this.renderFlag = false;
 }
 
 
-__Layout__.prototype.create = function(params){
+__Layout__.prototype.createItem = function(params){
     var self = this,
         _item = new __LayoutItem__(params),
         _childList = self._childList,
@@ -52,6 +51,9 @@ __Layout__.prototype.create = function(params){
 
 __Layout__.prototype.render = function(){
     var self = this;
+    ArrayProto.sort.call(self.itemArr,function(i,j){
+        return i.index - j.index;
+    });
 }
 
 

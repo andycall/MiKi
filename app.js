@@ -9,8 +9,6 @@ app = express();
 app.ejs = ejs;
 app.waterline = waterline;
 
-var __Layout__ = new require("./helper/__Layout__.js")["__Layout__"]();
-
 app.get('/hello', function(req, res){
     var body = 'Hello World';
     res.setHeader('Content-Type', 'text/plain');

@@ -72,7 +72,7 @@ __LayoutItem__.prototype.render = function()
 
     layout.cssList = ArrayProto.concat.call(layout.cssList,cssList);
     layout.scriptList = ArrayProto.concat.call(layout.scriptList,scriptList);
-    ArrayProto.push.call(layout.htmlArr,{
+    ArrayProto.push.call(layout.itemArr,{
         index: index,
         htmlArr: htmlArr
     });

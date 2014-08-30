@@ -13,9 +13,8 @@ app.get("",function(req,res){
     };
     var act = new Action(option);
 
-    //ƒ£∞Â‰÷»æ
     act.setParams({
         title:"111111"
     });
-    act.setTemplate(TEMPLATE_PATH+"/index_template.js");
+    act.setPage();
 });
