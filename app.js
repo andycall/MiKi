@@ -1,10 +1,15 @@
-var DIR_PATH = __dirname + "/node_modules/";
+DIR_PATH = __dirname + "/node_modules/";
+TEMPLATE_PATH = __dirname +"/template/";
 
 var express = require(DIR_PATH+'express');
 var ejs = require(DIR_PATH+"ejs");
-var Waterline = require(DIR_PATH+"waterline");
-var fs = require("fs");
-var app = express();
+var waterline = require(DIR_PATH+"waterline");
+app = express();
+
+app.ejs = ejs;
+app.waterline = waterline;
+
+var __Layout__ = new require("./helper/__Layout__.js")["__Layout__"]();
 
 app.get('/hello', function(req, res){
     var body = 'Hello World';
@@ -15,3 +20,4 @@ app.get('/hello', function(req, res){
 
 // Start Server
 app.listen(8080);
+
