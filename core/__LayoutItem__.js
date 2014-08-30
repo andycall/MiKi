@@ -12,7 +12,7 @@ var TEMPLATE_DIR = path.resolve(__dirname,"../template");
 
 function __LayoutItem__(paramMap)
 {
-    this._paramMap = paramMap;
+    this._paramMap = paramMap || {};
 
     this.parent = null;
     this.index = 0;

@@ -5,16 +5,17 @@
 var __LayoutItem__ = require("./__layoutItem__.js")["__LayoutItem__"],
     ArrayProto = Array.prototype;
 
-function __Layout__()
+function __Layout__(params)
 {
     this._itemCount = 0;
     this._childList = [];
 
-    this.renderItem = null;
     this.itemArr = [];
+    this.renderItem = null;
     this.scriptList = [];
     this.cssList = [];
     this.renderFlag = false;
+    this.params = params || {};
 }
 
 

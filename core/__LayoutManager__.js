@@ -15,9 +15,9 @@ function __LayoutManager__()
     this._layouts = [];
 }
 
-__LayoutManager__.prototype.createLayout = function(layoutPath){
+__LayoutManager__.prototype.createLayout = function(layoutPath,params){
     var self = this,
-        _layout = new __Layout__();
+        _layout = new __Layout__(params);
 
     layoutPath = path.join(LAYOUT_DIR,layoutPath);
 
@@ -58,6 +58,11 @@ __LayoutManager__.prototype.render = function(){
             layoutPath = layout.path,
             htmlStr = '';
 
+        for(var key in layoutObj.params)
+        {
+            variables[key] = layoutObj.params[key];
+        }
+
         htmlStr = fs.readFileSync(layoutPath,{encoding:'utf-8'});
         ArrayProto.push.call(layoutStrArr,htmlStr);
 
@@ -75,18 +80,33 @@ __LayoutManager__.prototype.render = function(){
 
     layoutStr = layoutStrArr.join('');
 
-    cssList = ArrayProto.map.call(cssList,function(value,index){
-            return '<link rel="stylesheet" type="text/css" href="'+value+'" />\n';
-        });
+    cssList = self._getListStr(cssList,function(value){
+        return '<link rel="stylesheet" type="text/css" href="'+value+'" />\n';
+    });
 
-    scriptList = ArrayProto.map.call(scriptList,function(value,index){
-            return '<script src="'+value+'"></script>\n'
-        });
+    scriptList = self._getListStr(scriptList,function(value){
+        return '<script src="'+value+'"></script>\n';
+    });
 
     variables["cssList"] = cssList.join('');
     variables["scriptList"] = scriptList.join('');
 
     result = ejs.render(layoutStr,variables);
+}
+
+__LayoutManager__.prototype._getListStr = function(list,fn){
+    var self = this;
+
+    list = ArrayProto.filter.call(list,function(value,index,list){
+        var lastIndex = list.lastIndexOf(value,index-1)
+        return ! (~lastIndex && lastIndex);
+    });
+
+    list = ArrayProto.map.call(list,function(value){
+        return fn(value);
+    });
+
+    return list;
 }
 
 exports.__LayoutManager__ = __LayoutManager__;
