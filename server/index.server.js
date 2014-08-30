@@ -11,10 +11,6 @@ app.get("",function(req,res){
       req:req,
       res:res
     };
-    var act = new Action(option);
 
-    act.setParams({
-        title:"111111"
-    });
-    act.setPage();
+    __Action__.init(option);
 });

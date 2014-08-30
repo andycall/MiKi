@@ -5,7 +5,10 @@
 var __Layout__ = require("./__Layout__")["__Layout__"],
     ejs = require("../node_modules/ejs"),
     fs = require("fs"),
+    path = require("path"),
     ArrayProto = Array.prototype;
+
+var LAYOUT_DIR = path.resolve(__dirname,"../layout");
 
 function __LayoutManager__()
 {
@@ -15,6 +18,9 @@ function __LayoutManager__()
 __LayoutManager__.prototype.createLayout = function(layoutPath){
     var self = this,
         _layout = new __Layout__();
+
+    layoutPath = path.join(LAYOUT_DIR,layoutPath);
+
     ArrayProto.push.call(self._layouts,{
         path:layoutPath,
         obj:_layout
@@ -44,7 +50,8 @@ __LayoutManager__.prototype.render = function(){
         cssList = [],
         variables = {},
         layoutStrArr = [],
-        layoutStr = '';
+        layoutStr = '',
+        result = {};
 
     ArrayProto.forEach.call(self._layouts,function(layout,index){
         var layoutObj = layout.obj,
@@ -79,8 +86,7 @@ __LayoutManager__.prototype.render = function(){
     variables["cssList"] = cssList.join('');
     variables["scriptList"] = scriptList.join('');
 
-    var result = ejs.render(layoutStr,variables);
-    console.log("middle");
+    result = ejs.render(layoutStr,variables);
 }
 
 exports.__LayoutManager__ = __LayoutManager__;

@@ -1,30 +1,25 @@
-var time = +new Date();
-var l = require("../helper/__LayoutManager__.js")["__LayoutManager__"];
+var __LayoutManager__ = require("../core/__LayoutManager__.js")["__LayoutManager__"];
 
-var __LayoutManager__ = new l();
-    //------------------载入骨架--------------------
-    var __Layout__ = __LayoutManager__.createLayout('./layout/index.html');
+var manager = new __LayoutManager__(),
+    layout = manager.createLayout('/index.html'),
+    headItem = layout.createItem({}),
+    contentItem = layout.createItem({}),
+    footerItem = layout.createItem({});
 
-     //-----------------头部 start------------------------------
-        var head = __Layout__.createItem({});
-        head.setBlock("header","./template/t1.html");
-        head.render();
-    //-------------------头部 end---------------------------------
+/*---头部--*/
+headItem.setBlock("header","/t1.html");
+headItem.render();
 
-    //-------------------内容 start--------------------------------
-        var content = __Layout__.createItem({});
-        content.setBlock("content","./template/t2.html");
 
-            //-----------------主要内容 start------------------------------
-            var mainContent = __Layout__.createItem({});
-            mainContent.setBlock("mainContent","./template/t3.html");
-            mainContent.render();
-            //------------------主要内容 end-----------------------------------
+/*--主内容区--*/
+contentItem.setBlock("leftContent","/t2.html");
+contentItem.setBlock("mainContent","/t2.html");
+contentItem.setBlock("rightContent","/t2.html");
+contentItem.render();
 
-        content.render();
-    //--------------------内容 end---------------------------------------
+/*--底部--*/
+footerItem.setBlock("footer","/t3.html");
+footerItem.render();
 
-    __Layout__.render();
-   //-----------------------骨架进行渲染----------------------
-
-__LayoutManager__.render();
+layout.render();
+manager.render();

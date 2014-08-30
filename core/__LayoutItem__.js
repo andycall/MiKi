@@ -3,9 +3,12 @@
  */
 
 var fs = require("fs"),
+    path = require("path"),
     readFile = fs.readFileSync,
     ejs = require("../node_modules/ejs"),
     ArrayProto = Array.prototype;
+
+var TEMPLATE_DIR = path.resolve(__dirname,"../template");
 
 function __LayoutItem__(paramMap)
 {
@@ -32,6 +35,8 @@ __LayoutItem__.prototype.setBlock = function(variable,template)
         _opts = {encoding:"utf-8"},
         _fileStr = '',
         _renderObj = {};
+
+    template = path.join(TEMPLATE_DIR,template);
 
     if(_args.length < 2)
     {
