@@ -80,11 +80,11 @@ __LayoutManager__.prototype.render = function(){
 
     layoutStr = layoutStrArr.join('');
 
-    cssList = self._getListStr(cssList,function(value){
+    cssList = self._filterList(cssList,function(value){
         return '<link rel="stylesheet" type="text/css" href="'+value+'" />\n';
     });
 
-    scriptList = self._getListStr(scriptList,function(value){
+    scriptList = self._filterList(scriptList,function(value){
         return '<script src="'+value+'"></script>\n';
     });
 
@@ -94,7 +94,7 @@ __LayoutManager__.prototype.render = function(){
     result = ejs.render(layoutStr,variables);
 }
 
-__LayoutManager__.prototype._getListStr = function(list,fn){
+__LayoutManager__.prototype._filterList = function(list,fn){
     var self = this;
 
     list = ArrayProto.filter.call(list,function(value,index,list){
